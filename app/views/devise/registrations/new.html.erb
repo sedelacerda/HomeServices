@@ -4,21 +4,36 @@
   <%= devise_error_messages! %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.text_field :first_name, autofocus: true, :type => "name", :placeholder => "Nombre", :class => "form-control", :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.text_field :last_name, :type => "name", :placeholder => "Apellido", :class => "form-control", :required => true %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.text_field :phone_number, :type => "phone", :placeholder => "Teléfono móvil", :class => "form-control", :required => true %>
+  </div>
+
+  <div><%= f.label :Sexo %></div>
+  <%= f.radio_button :is_female, 'true' %> <%= f.label :is_female, "Femenino" %>
+  <%= f.radio_button :is_female, 'false' %> <%= f.label :is_female, "Masculino" %>
+  <br/>
+
+  <div><%= f.label :Fecha_de_Nacimiento %><br />
+    <%= f.date_select :date_of_birth, :order => [:day, :month, :year], :start_year => 1900, :end_year => Time.now.year %></div>
+  <br/>
+
+  <div class="field">
+    <%= f.email_field :email, :type => "email", :placeholder => "Email", :class => "form-control", :required => true %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password, autocomplete: "off", :type => "password", :placeholder => "Clave", :class => "form-control", :required => true %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "off", :type => "password", :placeholder => "Confirmar Clave", :class => "form-control", :required => true %>
   </div>
 
   <div class="actions">
