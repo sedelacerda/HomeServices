@@ -233,31 +233,34 @@ http://www.jqueryscript.net/layout/Simple-jQuery-Plugin-To-Create-Pinterest-Styl
 </script>
 
 
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  
+  <div class="col-sm-12">
+    <% if @works.empty? %>
+    <h3>No existen trabajos disponibles en este momento</h3>
+    <% end %>
+  </div>
 
-<div class="col-sm-12">
-  <% if @works.empty? %>
-  <h3>No existen trabajos disponibles en este momento</h3>
+  <section id="pinBoot">
+
+  <% @works.each do |work| %>
+
+    <article class="white-panel"> <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg" alt="">
+      <h4><%= work.user.first_name %> <%= work.user.last_name %></h4>
+      <strong><%= work.title %></strong>
+      <br/>
+      <p style="text-align: justify;">
+        <%= truncate(work.description, :length => 600, :separator => ' ')%>
+      </p>
+      <p>
+        <%= link_to "Ver más", work, method: :get, :class=> "btn btn-primary pull-right" %>
+        <%= link_to 'Edit', edit_work_path(work) %>
+        <%= link_to 'Destroy', work, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </p>
+    </article>
   <% end %>
+
+  </section>
+
 </div>
-
-<section id="pinBoot">
-
-<% @works.each do |work| %>
-
-  <article class="white-panel"> <img src="http://gazettereview.com/wp-content/uploads/2016/03/facebook-avatar.jpg" alt="">
-    <h4><%= work.user.first_name %> <%= work.user.last_name %></h4>
-    <strong><%= work.title %></strong>
-    <br/>
-    <p style="text-align: justify;">
-      <%= truncate(work.description, :length => 600, :separator => ' ')%>
-    </p>
-    <p>
-      <%= link_to "Ver más", work, method: :get, :class=> "btn btn-primary pull-right" %>
-      <%= link_to 'Edit', edit_work_path(work) %>
-      <%= link_to 'Destroy', work, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </p>
-  </article>
-<% end %>
-
-</section>
